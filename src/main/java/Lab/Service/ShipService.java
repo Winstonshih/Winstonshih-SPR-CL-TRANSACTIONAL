@@ -5,9 +5,11 @@ import Lab.Model.Ship;
 import Lab.Repository.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+
+//import javax.transaction.Transactional;
 
 /**
  * TODO: Using the Transactional annotation, cause the methods of this Service
@@ -24,6 +26,7 @@ import java.util.List;
  * array has a negative or zero
  * tonnage - we're left to assume some form of unwanted user error in that case.
  */
+@Transactional(rollbackFor = InvalidTonnageException.class)
 @Service
 public class ShipService {
     ShipRepository shipRepository;
